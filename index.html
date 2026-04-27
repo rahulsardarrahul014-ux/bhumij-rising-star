@@ -2,117 +2,146 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhumij Rising Star</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bhumij Rising Star</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header>
-        <img src="images/logo.png" class="logo">
-        <h1>Bhumij Rising Star</h1>
-    </header>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-box">
+      <img src="images/logo.png">
+      <div>
+        <h2>BHUMIJ RISING STAR</h2>
+        <p>Empowering Youth, Building Future</p>
+      </div>
+    </div>
 
-    <!-- NAV -->
-    <nav>
-        <a href="#about">About</a>
-        <a href="#competition">Competition</a>
-        <a href="#register">Register</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#live">Live</a>
-        <a href="#rules">Rules</a>
-        <a href="#contact">Contact</a>
-    </nav>
+    <div class="btns">
+      <button class="btn blue">Register</button>
+      <button class="btn red">Logout</button>
+    </div>
+  </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <img src="images/myphoto.jpg" class="hero-img">
-        <h2>Welcome to Bhumij Rising Star 🌟</h2>
-    </section>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Features</a>
+    <a href="#">Live Competition</a>
+    <a href="#">Rules</a>
+    <a href="#">Contact</a>
+  </nav>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
-        <h2>About Event</h2>
-        <p>Show your talent and shine in Bhumij Rising Star competition.</p>
-    </section>
+  <!-- SLIDER -->
+  <section class="slider">
+    <div class="slide active">
+      <img src="images/banner.png">
+      <div class="text">
+        <h1>DREAM • BELIEVE • ACHIEVE</h1>
+        <p>Tribal Talent Platform</p>
+      </div>
+    </div>
 
-    <!-- COMPETITION -->
-    <section id="competition" class="section dark">
-        <h2>Competition Categories</h2>
-        <ul>
-            <li>🎤 Bhumij Song</li>
-            <li>💃 Bhumij Dance</li>
-            <li>🥁 Tribal Music</li>
-        </ul>
-        <p><b>Entry Fee: ₹500</b></p>
-    </section>
+    <div class="slide">
+      <img src="images/gallery1.jpg">
+    </div>
 
-    <!-- REGISTER -->
-    <section id="register" class="section">
-        <h2>Register Now</h2>
+    <div class="slide">
+      <img src="images/gallery2.jpg">
+    </div>
+  </section>
 
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="text" placeholder="Phone Number" required>
+  <!-- CARDS -->
+  <section class="cards">
+    <div class="card blue">
+      <h3>Features</h3>
+      <p>Dance, Song, Band Baja</p>
+    </div>
 
-            <select>
-                <option>Select Category</option>
-                <option>Song</option>
-                <option>Dance</option>
-                <option>Music</option>
-            </select>
+    <div class="card green">
+      <h3>Live Competition</h3>
+      <p>Solo, Duet, Group</p>
+    </div>
 
-            <button class="btn">Submit</button>
-        </form>
+    <div class="card orange">
+      <h3>Winner</h3>
+      <p>Admin Decision Final</p>
+    </div>
+  </section>
+  <section class="contact">
+    <h2>Login / Signup</h2>
 
-        <a href="https://wa.me/917903946369" class="btn">Register via WhatsApp</a>
-    </section>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
 
-    <!-- LIVE -->
-    <section id="live" class="section dark">
-        <h2>Live Event</h2>
-        <iframe src="https://www.youtube.com/embed/LIVE_VIDEO_ID"></iframe>
-        <p>Zoom link shared via WhatsApp</p>
-    </section>
+    <button onclick="signup()" class="btn green">Signup</button>
+    <button onclick="login()" class="btn blue">Login</button>
+    <button onclick="logout()" class="btn red">Logout</button>
+  </section>
 
-    <!-- GALLERY -->
-    <section id="gallery" class="section">
-        <h2>Gallery</h2>
-        <div class="gallery">
-            <img src="images/img1.jpg">
-            <img src="images/img2.jpg">
-            <img src="images/img3.jpg">
-        </div>
-    </section>
+  <!-- FORM -->
+  <section class="contact">
+    <h2>Registration</h2>
 
-    <!-- RULES -->
-    <section id="rules" class="section dark">
-        <h2>Rules</h2>
-        <ul>
-            <li>Entry fee non-refundable</li>
-            <li>Follow timing</li>
-            <li>No misbehavior</li>
-        </ul>
-    </section>
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="number" id="phone" placeholder="Phone" required>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-        <h2>Contact</h2>
-        <p>📞 7903946369</p>
+      <select id="category">
+        <option>Solo Dance</option>
+        <option>Song</option>
+        <option>Group</option>
+      </select>
 
-        <a href="#">Instagram</a> |
-        <a href="#">Facebook</a>
-    </section>
+      <label>
+        <input type="checkbox" required> I agree rules
+      </label>
 
-    <footer>
-        © 2026 Bhumij Rising Star
-    </footer>
+      <button type="submit" class="btn blue">Submit</button>
+    </form>
+  </section>
+  <!-- YOUTUBE UPLOAD -->
+  <section class="contact">
+    <h2>Upload YouTube Video</h2>
 
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/917903946369" class="whatsapp">💬</a>
+    <input type="text" id="videoTitle" placeholder="Video Title">
+
+    <select id="videoCategory">
+      <option>Santali Dance</option>
+      <option>Bhumij Dance</option>
+      <option>Song</option>
+      <option>Madal Baja</option>
+      <option>Karam Puja</option>
+      <option>Baha Banga</option>
+      <option>Sarhul Puja</option>
+    </select>
+
+    <input type="text" id="youtubeLink" placeholder="Paste YouTube Link">
+
+    <button onclick="saveVideo()" class="btn green">Upload Video</button>
+  </section>
+
+  <!-- VIDEO GALLERY -->
+  <section class="contact">
+    <h2>All Videos</h2>
+    <div id="videoList"></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Bhumij Rising Star</p>
+  </footer>
+
+  <!-- JS FILES -->
+  <script src="script.js"></script>
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="admin.js"></script>
 
 </body>
 
