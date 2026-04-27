@@ -1,148 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bhumij Rising Star</title>
 
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo-box">
-      <img src="images/logo.png">
-      <div>
-        <h2>BHUMIJ RISING STAR</h2>
-        <p>Empowering Youth, Building Future</p>
-      </div>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-box">
+    <img src="images/logo.png">
+    <div>
+      <h2>BHUMIJ RISING STAR</h2>
+      <p>Empowering Youth, Building Future</p>
     </div>
+  </div>
 
-    <div class="btns">
-      <button class="btn blue">Register</button>
-      <button class="btn red">Logout</button>
-    </div>
-  </header>
-
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="#">Home</a>
-    <a href="#">About</a>
-    <a href="#">Features</a>
-    <a href="#">Live Competition</a>
-    <a href="#">Rules</a>
-    <a href="#">Contact</a>
-  </nav>
-
-  <!-- SLIDER -->
-  <section class="slider">
-    <div class="slide active">
-      <img src="images/banner.png">
-      <div class="text">
-        <h1>DREAM • BELIEVE • ACHIEVE</h1>
-        <p>Tribal Talent Platform</p>
-      </div>
-    </div>
-
-    <div class="slide">
-      <img src="images/gallery1.jpg">
-    </div>
-
-    <div class="slide">
-      <img src="images/gallery2.jpg">
-    </div>
-  </section>
-
-  <!-- CARDS -->
-  <section class="cards">
-    <div class="card blue">
-      <h3>Features</h3>
-      <p>Dance, Song, Band Baja</p>
-    </div>
-
-    <div class="card green">
-      <h3>Live Competition</h3>
-      <p>Solo, Duet, Group</p>
-    </div>
-
-    <div class="card orange">
-      <h3>Winner</h3>
-      <p>Admin Decision Final</p>
-    </div>
-  </section>
-  <section class="contact">
-    <h2>Login / Signup</h2>
-
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-
-    <button onclick="signup()" class="btn green">Signup</button>
-    <button onclick="login()" class="btn blue">Login</button>
+  <div>
+    <button class="btn blue">Register</button>
     <button onclick="logout()" class="btn red">Logout</button>
-  </section>
+  </div>
+</header>
 
-  <!-- FORM -->
-  <section class="contact">
-    <h2>Registration</h2>
+<!-- NAV -->
+<nav class="navbar">
+  <a href="#">Home</a>
+  <a href="#about">About</a>
+  <a href="#videoList">Videos</a>
+  <a href="#register">Register</a>
+</nav>
 
-    <form id="registerForm">
-      <input type="text" id="name" placeholder="Name" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="number" id="phone" placeholder="Phone" required>
+<!-- HERO -->
+<section class="hero">
+  <h1>Bhumij Rising Star</h1>
+  <p>Showcasing Tribal Talent</p>
+</section>
 
-      <select id="category">
-        <option>Solo Dance</option>
-        <option>Song</option>
-        <option>Group</option>
-      </select>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <h2>About Project</h2>
+  <p>This platform showcases cultural talent and organizes competitions.</p>
+</section>
 
-      <label>
-        <input type="checkbox" required> I agree rules
-      </label>
+<!-- LOGIN -->
+<section class="section">
+  <h2>Login / Signup</h2>
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Password">
+  <button onclick="signup()" class="btn green">Signup</button>
+  <button onclick="login()" class="btn blue">Login</button>
+</section>
 
-      <button type="submit" class="btn blue">Submit</button>
-    </form>
-  </section>
-  <!-- YOUTUBE UPLOAD -->
-  <section class="contact">
-    <h2>Upload YouTube Video</h2>
+<!-- REGISTER -->
+<section id="register" class="section">
+  <h2>Register</h2>
+  <form id="registerForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="number" id="phone" placeholder="Phone" required>
 
-    <input type="text" id="videoTitle" placeholder="Video Title">
-
-    <select id="videoCategory">
-      <option>Santali Dance</option>
-      <option>Bhumij Dance</option>
+    <select id="category">
+      <option>Dance</option>
       <option>Song</option>
-      <option>Madal Baja</option>
-      <option>Karam Puja</option>
-      <option>Baha Banga</option>
-      <option>Sarhul Puja</option>
     </select>
 
-    <input type="text" id="youtubeLink" placeholder="Paste YouTube Link">
+    <button type="submit" class="btn blue">Submit</button>
+  </form>
+</section>
 
-    <button onclick="saveVideo()" class="btn green">Upload Video</button>
-  </section>
+<!-- VIDEO UPLOAD -->
+<section class="section">
+  <h2>Upload Video</h2>
+  <input type="text" id="videoTitle" placeholder="Title">
+  <input type="text" id="youtubeLink" placeholder="YouTube Link">
+  <button onclick="saveVideo()" class="btn green">Upload</button>
+</section>
 
-  <!-- VIDEO GALLERY -->
-  <section class="contact">
-    <h2>All Videos</h2>
-    <div id="videoList"></div>
-  </section>
+<!-- VIDEOS -->
+<section class="section">
+  <h2>All Videos</h2>
+  <div id="videoList"></div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2026 Bhumij Rising Star</p>
-  </footer>
+<footer>
+  <p>© 2026 Bhumij Rising Star</p>
+</footer>
 
-  <!-- JS FILES -->
-  <script src="script.js"></script>
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="admin.js"></script>
+<script src="script.js"></script>
+<script type="module" src="firebase.js"></script>
 
 </body>
-
 </html>

@@ -2,7 +2,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
 import { 
-  getFirestore, addDoc, collection, getDocs 
+  getFirestore, 
+  addDoc, 
+  collection, 
+  getDocs 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import { 
@@ -23,17 +26,24 @@ const firebaseConfig = {
   appId: "1:161882531831:web:cd981fcf9ed6a20e6570f2"
 };
 
+
+// ================= INIT =================
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
 
-// ================= LOGIN SYSTEM =================
+// ================= AUTH SYSTEM =================
 
 // Signup
 window.signup = async function () {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
+  const email = document.getElementById("loginEmail")?.value;
+  const password = document.getElementById("loginPassword")?.value;
+
+  if (!email || !password) {
+    alert("Enter email & password");
+    return;
+  }
 
   try {
     await createUserWithEmailAndPassword(auth, email, password);
@@ -45,8 +55,13 @@ window.signup = async function () {
 
 // Login
 window.login = async function () {
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
+  const email = document.getElementById("loginEmail")?.value;
+  const password = document.getElementById("loginPassword")?.value;
+
+  if (!email || !password) {
+    alert("Enter email & password");
+    return;
+  }
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -58,29 +73,42 @@ window.login = async function () {
 
 // Logout
 window.logout = async function () {
-  await signOut(auth);
-  alert("Logged Out ✅");
+  try {
+    await signOut(auth);
+    alert("Logged Out ✅");
+  } catch (err) {
+    alert(err.message);
+  }
 };
 
 
 // ================= PAGE LOAD =================
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
 
-  // REGISTRATION FORM
+  // REGISTER FORM
   const form = document.getElementById("registerForm");
 
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const phone = document.getElementById("phone").value;
-      const category = document.getElementById("category").value;
+      const name = document.getElementById("name")?.value;
+      const email = document.getElementById("email")?.value;
+      const phone = document.getElementById("phone")?.value;
+      const category = document.getElementById("category")?.value;
+
+      if (!name || !email || !phone) {
+        alert("Fill all fields");
+        return;
+      }
 
       try {
         await addDoc(collection(db, "users"), {
-          name, email, phone, category
+          name,
+          email,
+          phone,
+          category,
+          createdAt: new Date()
         });
 
         alert("Registration Successful ✅");
@@ -94,32 +122,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // LOAD VIDEOS
   loadVideos();
-  const data = doc.data();
-  if (data.approved !== true) return;
 });
 
 
-// ================= SAVE YOUTUBE VIDEO =================
+// ================= SAVE VIDEO =================
 window.saveVideo = async function () {
-  const title = document.getElementById("videoTitle").value;
-  const category = document.getElementById("videoCategory").value;
-  const link = document.getElementById("youtubeLink").value;
+  const title = document.getElementById("videoTitle")?.value;
+  const link = document.getElementById("youtubeLink")?.value;
+
+  if (!title || !link) {
+    alert("Fill all fields");
+    return;
+  }
 
   if (!link.includes("youtube") && !link.includes("youtu.be")) {
-    alert("Valid YouTube link dalo");
+    alert("Enter valid YouTube link ❌");
     return;
   }
 
   try {
     await addDoc(collection(db, "videos"), {
       title,
-      category,
       link,
-      approved: false, 
+      approved: false,
       time: new Date()
     });
 
-    alert("Video Uploaded ✅");
+    alert("Video Uploaded (Pending Approval) ⏳");
 
   } catch (err) {
     alert(err.message);
@@ -127,37 +156,55 @@ window.saveVideo = async function () {
 };
 
 
-// ================= SHOW VIDEOS =================
+// ================= LOAD VIDEOS =================
 async function loadVideos() {
   const container = document.getElementById("videoList");
 
   if (!container) return;
 
-  container.innerHTML = "";
+  container.innerHTML = "<p>Loading videos...</p>";
 
-  const querySnapshot = await getDocs(collection(db, "videos"));
+  try {
+    const querySnapshot = await getDocs(collection(db, "videos"));
 
-  querySnapshot.forEach(doc => {
-    const data = doc.data();
-
-    let videoId = "";
-
-    if (data.link.includes("v=")) {
-      videoId = data.link.split("v=")[1].split("&")[0];
-    } else if (data.link.includes("youtu.be")) {
-      videoId = data.link.split("youtu.be/")[1];
+    if (querySnapshot.empty) {
+      container.innerHTML = "<p>No videos available</p>";
+      return;
     }
 
-    container.innerHTML += `
-      <div style="margin:20px; background:#fff; padding:10px; border-radius:10px;">
-        <h3>${data.title}</h3>
-        <p>${data.category}</p>
+    container.innerHTML = "";
 
-        <iframe width="100%" height="250"
-        src="https://www.youtube.com/embed/${videoId}"
-        frameborder="0" allowfullscreen></iframe>
-      </div>
-    `;
-  });
+    querySnapshot.forEach(doc => {
+      const data = doc.data();
+
+      // ✅ ONLY APPROVED VIDEOS
+      if (data.approved !== true) return;
+
+      let videoId = "";
+
+      if (data.link.includes("v=")) {
+        videoId = data.link.split("v=")[1].split("&")[0];
+      } 
+      else if (data.link.includes("youtu.be")) {
+        videoId = data.link.split("youtu.be/")[1];
+      }
+
+      container.innerHTML += `
+        <div class="video-card">
+          <h3>${data.title}</h3>
+          <iframe width="100%" height="200"
+          src="https://www.youtube.com/embed/${videoId}"
+          frameborder="0" allowfullscreen></iframe>
+        </div>
+      `;
+    });
+
+  } catch (err) {
+    container.innerHTML = "<p>Error loading videos</p>";
+    console.error(err);
+  }
 }
+
+
+// ================= EXPORT =================
 export { db };
